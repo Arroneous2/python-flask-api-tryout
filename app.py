@@ -18,3 +18,7 @@ def create():
     width = request.form.get("width") 
     height = request.form.get("height")
     return db.photos_create(name, width, height)
+
+@app.route("/photos/<id>.json")
+def show(id):
+    return db.photos_find_by_id(id)

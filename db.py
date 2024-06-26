@@ -66,5 +66,16 @@ def photos_create(name, width, height):
     conn.commit()
     return dict(row)
 
+def photos_find_by_id(id):
+    conn = connect_to_db()
+    row = conn.execute(
+        """
+        SELECT * FROM photos
+        WHERE id = ?
+        """,
+        (id,),
+    ).fetchone()
+    return(dict(row))
+
 if __name__ == "__main__":
     initial_setup()
