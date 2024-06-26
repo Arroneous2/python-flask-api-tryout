@@ -77,5 +77,18 @@ def photos_find_by_id(id):
     ).fetchone()
     return(dict(row))
 
+def photos_update_by_id(name, width, height, id):
+    conn = connect_to_db()
+    row = conn.execute(
+        """
+        UPDATE photos SET name = ?, width = ?, height = ?
+        WHERE id = ?
+        RETURNING *
+        """,
+        (name, width, height, id),
+    ).fetchone()
+    conn.commit()
+    return dict(row)
+
 if __name__ == "__main__":
     initial_setup()
