@@ -90,5 +90,17 @@ def photos_update_by_id(name, width, height, id):
     conn.commit()
     return dict(row)
 
+def photos_destroy_by_id(id):
+    conn = connect_to_db()
+    row = conn.execute(
+        """
+          DELETE from photos
+          WHERE id = ?
+        """,
+        (id),
+    )
+    conn.commit()
+    return {"message": "Photo of id: {id} has been deleted"}
+
 if __name__ == "__main__":
     initial_setup()
